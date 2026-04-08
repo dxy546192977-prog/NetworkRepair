@@ -1,4 +1,4 @@
-# Cursor 大模型网络修复工具
+# 中国区访问大模型网络受限的修复工具
 
 一键诊断并修复 macOS / Windows 上 Cursor 连接 OpenAI、Anthropic、Cursor API 的网络问题。
 
