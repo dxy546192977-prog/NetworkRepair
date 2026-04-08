@@ -1,0 +1,31 @@
+#!/bin/zsh
+# ============================================================================
+#  一键修复 - Cursor 大模型网络 (macOS)
+#  双击此 App 即可自动打开终端并执行网络修复
+# ============================================================================
+
+APP_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+PROJECT_DIR="$(cd "$APP_DIR/.." && pwd)"
+SRC_DIR="$PROJECT_DIR/src"
+
+open_in_terminal() {
+    local repair_script="$SRC_DIR/lib/network_repair.sh"
+
+    if [ ! -f "$repair_script" ]; then
+        osascript -e "display dialog \"修复脚本未找到：\n$repair_script\" buttons {\"确定\"} default button 1 with icon stop with title \"Cursor 网络修复\""
+        exit 1
+    fi
+
+    chmod +x "$repair_script" 2>/dev/null || true
+    chmod +x "$SRC_DIR/lib/network_check.sh" 2>/dev/null || true
+    chmod +x "$SRC_DIR/bin/cursor-network-repair" 2>/dev/null || true
+
+    osascript <<ASCRIPT
+tell application "Terminal"
+    activate
+    set newTab to do script "clear && echo '' && echo '================================================================' && echo '  Cursor Network Repair Assistant (macOS)' && echo '================================================================' && echo '  Preparing repair session...' && echo '' && bash '$repair_script'; EXIT_CODE=\$?; echo ''; echo '================================================================'; if [ \"\$EXIT_CODE\" -eq 0 ]; then echo '  Finished. ExitCode: '\$EXIT_CODE; else echo '  Finished with issues. ExitCode: '\$EXIT_CODE; fi; echo '================================================================'; echo ''; echo 'Press RETURN to close this window...'; read -r; exit"
+end tell
+ASCRIPT
+}
+
+open_in_terminal

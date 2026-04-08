@@ -1,0 +1,21 @@
+# Logs
+src/logs/*.log
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Archive
+.archive/
+
+# Build artifacts (Win EXE is tracked, but Go build cache is not)
+tools/win-launcher/win-launcher
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# company-proxy-kit (reference, not part of this project)
+src/company-proxy-kit-v0.1.0/

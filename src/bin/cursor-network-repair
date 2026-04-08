@@ -1,0 +1,7 @@
+#!/bin/zsh
+set -euo pipefail
+
+APP_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+export APP_ROOT
+
+exec bash "$APP_ROOT/lib/network_repair.sh" "$@"
