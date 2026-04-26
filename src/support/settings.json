@@ -1,0 +1,40 @@
+{
+  "version": "1.0.0",
+  "targets": [
+    "api.openai.com",
+    "chat.openai.com",
+    "api.anthropic.com",
+    "claude.ai",
+    "openrouter.ai",
+    "api2.cursor.sh",
+    "api.cursor.sh"
+  ],
+  "dns": {
+    "primary": "1.1.1.1",
+    "secondary": "8.8.8.8"
+  },
+  "timeouts": {
+    "dns_sec": 4,
+    "tcp_sec": 6,
+    "https_probe_sec": 20
+  },
+  "probe_url": "https://api2.cursor.sh/",
+  "diagnostics": {
+    "cursorHttp2Targets": [
+      "https://api2.cursor.sh/",
+      "https://api.cursor.sh/"
+    ]
+  },
+  "repairs": {
+    "fixMicrosoftStoreLinkAfterRepair": true
+  },
+  "integrations": {
+    "cursorWrapper": {
+      "enabled": false,
+      "command": "cursor-company",
+      "installOnOneClick": false
+    },
+    "launchClaudeCodeOnExeSuccess": false,
+    "showTrayBalloonOnExeFinish": true
+  }
+}
